@@ -37,10 +37,11 @@ function init(ext) {
       figlet.textSync('SweepD', { horizontalLayout: 'full' })
     )
   );
-  var arquivos = files.findFilesInDir('./src', ext);
+  var arquivos = files.findFilesInDir(files.getCurrentDirectoryBase(), ext);
   for (var i = 0; i < arquivos.length; i++) {
 
     try {
+      console.log(arquivos[i]);
       fs.readFile(arquivos[i], 'utf8', (err, data) => {
         if (err) throw err;
         if (data.includes('joao')) {
