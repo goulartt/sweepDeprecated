@@ -1,3 +1,4 @@
+#!/usr/bin/env node --harmony
 const program = require('commander');
 // Require logic.js file and extract controller functions using JS destructuring assignment
 const files = require('./lib/files');
@@ -27,7 +28,7 @@ program
     init('js');
   });
 
-program.parse(process.argv);
+  program.parse(process.argv);
 
 
 
