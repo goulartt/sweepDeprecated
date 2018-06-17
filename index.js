@@ -1,6 +1,5 @@
 #!/usr/bin/env node --harmony
 const program = require('commander');
-// Require logic.js file and extract controller functions using JS destructuring assignment
 const files = require('./lib/files');
 const clear = require('clear');
 const figlet = require('figlet');
@@ -28,7 +27,7 @@ program
     init('js');
   });
 
-  program.parse(process.argv);
+program.parse(process.argv);
 
 
 
@@ -41,6 +40,7 @@ function init(ext) {
   );
 
   var arquivos = files.findFilesInDir(files.getCurrentDirectoryBase(), ext);
+
   for (var i = 0; i < arquivos.length; i++) {
     try {
       fs.readFile(arquivos[i], 'utf8', (err, data) => {
@@ -49,14 +49,18 @@ function init(ext) {
         if (ext === 'php') {
           deprecateds = deprecated.getPhp();
         } else {
-
+          deprecateds = [];
         }
-        for (var j = 0; j < deprecateds.length; j++) {
-          if (data.includes(deprecateds[j].funcao)) {
-            msg(deprecateds[j]);
-            console.log('\n');
+        var array = data.toString().split("\n");
+        for (n in array) {
+          for (var j = 0; j < deprecateds.length; j++) {
+            if (array.includes(deprecateds[j].funcao)) {
+              msg(deprecateds[j], n, arquivos[i-1]);
+              console.log('\n');
+            }
           }
         }
+     
       });
     } catch (err) {
       console.log(err);
@@ -64,7 +68,12 @@ function init(ext) {
   }
 }
 
-function msg(texto) {
+function msg(texto, i, arquivo) {
+  console.log(
+    chalk.red(
+      'arquivo: '+arquivo+'\nlinha '+i
+    )
+  );
   console.log(
     chalk.red(
       texto.funcao + ' é uma função depreciada e insegura, remova!'
