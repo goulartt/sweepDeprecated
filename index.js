@@ -5,6 +5,7 @@ const clear = require('clear');
 const figlet = require('figlet');
 const chalk = require('chalk');
 const fs = require('fs');
+const deprecated = require('./lib/list-deprecated');
 
 program
   .version('0.0.1')
@@ -43,10 +44,18 @@ function init(ext) {
     try {
       fs.readFile(arquivos[i], 'utf8', (err, data) => {
         if (err) throw err;
-        if (data.includes('joao')) {
-          msg('joao');
-        }
+        var deprecateds;
+        if (ext === 'php') {
+          deprecateds = deprecated.getPhp();
+        } else {
 
+        }
+        for (var j = 0; j < deprecateds.length; j++) {
+          if (data.includes(deprecateds[j].funcao)) {
+            msg(deprecateds[j]);
+            console.log('\n');
+          }
+        }
       });
     } catch (err) {
       console.log(err);
@@ -57,8 +66,24 @@ function init(ext) {
 function msg(texto) {
   console.log(
     chalk.red(
-      texto + ' é uma função depreciada e insegura, remova!'
+      texto.funcao + ' é uma função depreciada e insegura, remova!'
     )
   );
+
+  if (texto.motivo !== undefined) {
+    console.log(
+      chalk.yellow(
+        'Motivo: ' + texto.motivo
+      )
+    );
+  }
+  if (texto.solucao !== undefined) {
+    console.log(
+      chalk.green(
+        'Solução: ' + texto.motivo
+      )
+    );
+
+  }
 }
 
