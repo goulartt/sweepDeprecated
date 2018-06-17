@@ -27,11 +27,8 @@
     "clear": "^0.1.0",
     "clui": "^0.3.6",
     "commander": "^2.15.1",
-    "configstore": "^3.1.2",
     "figlet": "^1.2.0",
-    "inquirer": "^5.2.0",
     "lodash": "^4.17.10",
-    "minimist": "^1.2.0",
-    "touch": "^3.1.0"
+    "minimist": "^1.2.0"
   }
 }
