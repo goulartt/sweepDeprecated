@@ -52,38 +52,41 @@ async function init(ext) {
   );
 
   var arquivos = files.findFilesInDir(files.getCurrentDirectoryBase(), ext);
-
-  const bar1 = criaBar(arquivos.length);
-  for (var i = 0; i < arquivos.length; i++) {
-    try {
-      fs.readFile(arquivos[i], 'utf8', (err, data) => {
-        if (err) throw err;
-        var deprecateds;
-        if (ext === 'php') {
-          deprecateds = deprecated.getPhp();
-        } else if (ext === 'py') {
-          deprecateds = deprecated.getPy2();
-        } else {
-          deprecateds = [];
-        }
-        var array = data.toString().split("\n");
-        bar1.update(i);
-        for (n in array) {
-          for (var j = 0; j < deprecateds.length; j++) {
-            if (array[n].includes(deprecateds[j].funcao)) {
-              msg(deprecateds[j], n, arquivos[i - 1]);
-              console.log('\n');
-              achou = true;
+  if (arquivos !== undefined) {
+    const bar1 = criaBar(arquivos.length);
+    for (var i = 0; i < arquivos.length; i++) {
+      try {
+        fs.readFile(arquivos[i], 'utf8', (err, data) => {
+          if (err) throw err;
+          var deprecateds;
+          if (ext === 'php') {
+            deprecateds = deprecated.getPhp();
+          } else if (ext === 'py') {
+            deprecateds = deprecated.getPy2();
+          } else {
+            deprecateds = [];
+          }
+          var array = data.toString().split("\n");
+          bar1.update(i);
+          for (n in array) {
+            for (var j = 0; j < deprecateds.length; j++) {
+              if (array[n].includes(deprecateds[j].funcao)) {
+                msg(deprecateds[j], parseInt(n)+1, arquivos[i - 1]);
+                console.log('\n');
+                achou = true;
+              }
             }
           }
-        }
-      });
-    } catch (err) {
-      console.log(err);
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
+    bar1.update(arquivos.length);
+    bar1.stop();
   }
-  bar1.update(arquivos.length);
-  bar1.stop();
+
+
 }
 
 function msg(texto, i, arquivo) {
