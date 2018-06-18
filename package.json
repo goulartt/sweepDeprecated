@@ -1,6 +1,6 @@
 {
   "name": "sweepd",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "\"remove deprecated functions\"",
   "main": "index.js",
   "scripts": {
