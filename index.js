@@ -10,7 +10,7 @@ const deprecated = require('./lib/list-deprecated');
 const _cliProgress = require('cli-progress');
 
 program
-  .version('1.0.6')
+  .version('1.0.7')
   .description('Varrer funções inseguras e depreciadas');
 
 program
@@ -41,7 +41,7 @@ program.parse(process.argv);
 
 
 
-function init(ext) {
+async function init(ext) {
   clear();
   console.log(
     chalk.green(
@@ -73,7 +73,7 @@ function init(ext) {
             if (array[n].includes(deprecateds[j].funcao)) {
               msg(deprecateds[j], n, arquivos[i - 1]);
               console.log('\n');
-              achou=true;
+              achou = true;
             }
           }
         }
