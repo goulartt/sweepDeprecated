@@ -10,7 +10,7 @@ const deprecated = require('./lib/list-deprecated');
 const _cliProgress = require('cli-progress');
 
 program
-  .version('1.0.7')
+  .version('1.0.9')
   .description('Varrer funções inseguras e depreciadas');
 
 program
