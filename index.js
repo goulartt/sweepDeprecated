@@ -13,23 +13,23 @@ program
 
 program
   .command('php')
-  .alias('p')
+  .alias('ph')
   .description('Rodar script php')
   .action(() => {
     init('php');
   });
 
 program
-  .command('js')
-  .alias('j')
+  .command('javascript')
+  .alias('js')
   .description('Rodar script js')
   .action(() => {
     init('js');
   });
 
 program
-  .command('py')
-  .alias('p')
+  .command('python')
+  .alias('py')
   .description('Rodar script Python 2')
   .action(() => {
     init('py');
@@ -57,7 +57,7 @@ function init(ext) {
           deprecateds = deprecated.getPhp();
         }
         else if(ext === 'py') {
-          deprecated = deprecated.getPy2();
+          deprecateds = deprecated.getPy2();
         }
         else {
           deprecateds = [];
