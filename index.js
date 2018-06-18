@@ -40,7 +40,6 @@ function init(ext) {
   );
 
   var arquivos = files.findFilesInDir(files.getCurrentDirectoryBase(), ext);
-
   for (var i = 0; i < arquivos.length; i++) {
     try {
       fs.readFile(arquivos[i], 'utf8', (err, data) => {
@@ -54,13 +53,14 @@ function init(ext) {
         var array = data.toString().split("\n");
         for (n in array) {
           for (var j = 0; j < deprecateds.length; j++) {
-            if (array.includes(deprecateds[j].funcao)) {
-              msg(deprecateds[j], n, arquivos[i-1]);
+            if (array[n].includes(deprecateds[j].funcao)) {
+              achou = true;
+              msg(deprecateds[j], n, arquivos[i - 1]);
               console.log('\n');
             }
           }
         }
-     
+
       });
     } catch (err) {
       console.log(err);
@@ -71,7 +71,7 @@ function init(ext) {
 function msg(texto, i, arquivo) {
   console.log(
     chalk.red(
-      'arquivo: '+arquivo+'\nlinha '+i
+      'arquivo: ' + arquivo + '\nlinha ' + i
     )
   );
   console.log(
@@ -90,7 +90,7 @@ function msg(texto, i, arquivo) {
   if (texto.solucao !== undefined) {
     console.log(
       chalk.green(
-        'Solução: ' + texto.motivo
+        'Solução: ' + texto.solucao
       )
     );
 

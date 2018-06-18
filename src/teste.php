@@ -1,2 +1,35 @@
-phpinfo
 exec
+passthru
+system
+shell_exec
+`` (backticks)
+popen 
+proc_open
+pcntl_exec
+eval()
+assert()
+preg_replace('/.*/e',...) -
+create_function()
+include()
+include_once()
+require()
+require_once()
+phpinfo
+posix_mkfifo
+posix_getlogin
+posix_ttyname
+getenv
+get_current_user
+proc_get_status
+get_cfg_var
+disk_free_space
+disk_total_space
+diskfreespace
+getcwd
+getlastmo
+getmygid
+getmyinode
+getmypid
+getmyuid
+extract
+parse_str
