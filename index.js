@@ -27,6 +27,14 @@ program
     init('js');
   });
 
+program
+  .command('py')
+  .alias('p')
+  .description('Rodar script Python 2')
+  .action(() => {
+    init('py');
+  });
+
 program.parse(process.argv);
 
 
@@ -47,7 +55,11 @@ function init(ext) {
         var deprecateds;
         if (ext === 'php') {
           deprecateds = deprecated.getPhp();
-        } else {
+        }
+        else if(ext === 'py') {
+          deprecated = deprecated.getPy2();
+        }
+        else {
           deprecateds = [];
         }
         var array = data.toString().split("\n");
