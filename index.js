@@ -10,7 +10,7 @@ const deprecated = require('./lib/list-deprecated');
 const _cliProgress = require('cli-progress');
 
 program
-  .version('1.0.9')
+  .version('1.1.0')
   .description('Varrer funções inseguras e depreciadas');
 
 program
@@ -26,9 +26,23 @@ program
   .alias('js')
   .description('Rodar script js')
   .action(() => {
-    init('js');
+    //init('js');
+    clear();
+    console.log(
+      chalk.red(
+        'AINDA NÃO IMPLEMENTADO!\n'
+      )+
+      chalk.yellow(
+        'Uma equipe de macacos bem treinados estão trabalhando nisso...'
+      )
+    );
+    console.log(`
+            \\   ^__^
+             \\  (oo)\\_______
+                (__)\\       )\\/\\
+                    ||----w |
+                    ||     ||`);
   });
-
 program
   .command('python')
   .alias('py')
@@ -71,7 +85,7 @@ async function init(ext) {
           for (n in array) {
             for (var j = 0; j < deprecateds.length; j++) {
               if (array[n].includes(deprecateds[j].funcao)) {
-                msg(deprecateds[j], parseInt(n)+1, arquivos[i - 1]);
+                msg(deprecateds[j], parseInt(n) + 1, arquivos[i - 1]);
                 console.log('\n');
                 achou = true;
               }
